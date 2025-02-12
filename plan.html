@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Will You Be My Valentine?</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #ffebee;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #d32f2f;
+        }
+        .heart {
+            color: red;
+            font-size: 30px;
+        }
+        label {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #b71c1c;
+        }
+        .message {
+            font-size: 18px;
+            margin-top: 15px;
+            color: #388e3c;
+            display: none;
+        }
+
+        .select {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1> <span class="heart">❤️</span></h1>
+        <p>I’d love to take you out po! Just let me know:</p>
+        
+        <form id="valentineForm">
+            <label>Your Email 📩</label>
+            <input type="email" id="valentineEmail" placeholder="Your email" required>
+
+            <label>Where do you want to eat? </label>
+            <input type="text" id="food" required>
+            
+            <label>What time are you free? 📅</label>
+            <input type="time" id="time" required>
+
+            <label>Where do you want to go?</label><br/>
+            <select place id="place">
+                <option value="Market Market">Market Market</option>
+                <option value="Sm Aura">Sm Aura</option>
+                <option value="Uptown Mall">Uptown Mall</option>
+            </select>
+            
+            <button type="button" onclick="sendEmail()">Send My Answer 💌</button>
+        </form>
+
+        <p class="message" id="confirmation">Your response has been sent! 💕</p>
+    </div>
+
+    <script>
+        (function(){
+            emailjs.init("hyI3JNQLtANlHOtZf"); // Replace with your EmailJS Public Key
+        })();
+
+        function sendEmail() {
+            let valentineEmail = document.getElementById("valentineEmail").value;
+            let food = document.getElementById("food").value;
+            let time = document.getElementById("time").value;
+            let place = document.getElementById("place").value;
+
+            if (food && time && place && valentineEmail) {
+                let templateParams = {
+                    valentineEmail: valentineEmail,
+                    food: food,
+                    date: time,
+                    place: place
+                };
+
+                emailjs.send("service_hpzrb3i", "template_doponvr", templateParams)
+                    .then(function(response) {
+                        console.log("Email sent successfully!", response);
+                        document.getElementById("confirmation").style.display = "block";
+                    }, function(error) {
+                        console.error("Failed to send email:", error);
+                        alert("Failed to send email. Please try again.");
+                    });
+
+            } else {
+                alert("Please fill in all fields!");
+            }
+        }
+    </script>
+
+</body>
+</html>
