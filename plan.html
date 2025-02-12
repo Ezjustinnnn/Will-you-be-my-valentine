@@ -32,7 +32,7 @@
             font-size: 18px;
             font-weight: bold;
         }
-        input, button {
+        input, button, select {
             width: 100%;
             padding: 10px;
             margin-top: 10px;
@@ -56,14 +56,9 @@
             color: #388e3c;
             display: none;
         }
-
-        .select {
-            width: 100%;
-        }
     </style>
 </head>
 <body>
-
     <div class="container">
         <h1> <span class="heart">❤️</span></h1>
         <p>Just let me know:</p>
@@ -72,14 +67,20 @@
             <label>Your Email 📩</label>
             <input type="email" id="valentineEmail" placeholder="Your email" required>
 
-            <label>Where do you want to eat? </label>
-            <input type="text" id="food" required>
+            <label>Where do you want to eat?</label>
+            <select id="food" required>
+                <option value="Jollibee">Jollibee</option>
+                <option value="McDonald's">McDonald's</option>
+                <option value="Chowking">Chowking</option>
+                <option value="Mang Inasal">Mang Inasal</option>
+                <option value="KFC">KFC</option>
+            </select>
             
             <label>What time are you free? 📅</label>
             <input type="time" id="time" required>
 
-            <label>Where do you want to go?</label><br/>
-            <select place id="place">
+            <label>Where do you want to go?</label>
+            <select id="place" required>
                 <option value="Market Market">Market Market</option>
                 <option value="Sm Aura">Sm Aura</option>
                 <option value="Uptown Mall">Uptown Mall</option>
@@ -110,7 +111,7 @@
                     place: place
                 };
 
-                emailjs.send("service_hpzrb3i", "template_doponvr", templateParams)
+                emailjs.send("service_hpzrb3i", "template_hnnwzz5s", templateParams)
                     .then(function(response) {
                         console.log("Email sent successfully!", response);
                         document.getElementById("confirmation").style.display = "block";
@@ -118,12 +119,11 @@
                         console.error("Failed to send email:", error);
                         alert("Failed to send email. Please try again.");
                     });
-
             } else {
                 alert("Please fill in all fields!");
             }
         }
     </script>
-
 </body>
 </html>
+
